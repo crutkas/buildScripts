@@ -36,6 +36,12 @@ if(!$isReboot)
 }
 else
 {
+	# Copy JSON fragments to Terminal folder
+	$termFragPath = $env:LOCALAPPDATA + "\Microsoft\Windows Terminal\Fragments\build-extension"
+	mkdir $termFragPath
+
+	move-item -Path .\build-extension -Destination $termFragPath
+
 	# Rebooted
 	Write-Output "Rebooted"
 
@@ -79,12 +85,6 @@ else
 	# Installing stuff on Windows
 	Write-Output "Winget install stuff"
 	winget import WSL_WinGet.json
-
-	# Copy JSON fragments to Terminal folder
-	$termFragPath = $env:LOCALAPPDATA + "\Microsoft\Windows Terminal\Fragments\build-extension"
-	mkdir $termFragPath
-
-	move-item -Path $mypath\build-extension -Destination $termFragPath
 }
 
 if(!$isReboot)

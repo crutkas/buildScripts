@@ -13,6 +13,11 @@ if (!$isAdmin) {
 	exit;
 }
 
+# Copy JSON fragments to Terminal folder
+$termFragPath = $env:LOCALAPPDATA + "\Microsoft\Windows Terminal\Fragments\build-extension"
+mkdir $termFragPath
+move-item -Path .\build-extension -Destination $termFragPath
+
 # installing what I like 😊
 winget import Terminal_WinGet.json
 
@@ -22,12 +27,8 @@ $env:Path += ";" + $Env:Programfiles + "\git\cmd"
 # Getting terminal source code cloned
 mkdir $env:USERPROFILE/source/repo
 cd $env:USERPROFILE/source/repo
-git clone https://github.com/microsoft/terminal
 
-# Copy JSON fragments to Terminal folder
-$termFragPath = $env:LOCALAPPDATA + "\Microsoft\Windows Terminal\Fragments\build-extension"
-mkdir $termFragPath
-move-item -Path $mypath\build-extension -Destination $termFragPath
+git clone https://github.com/microsoft/terminal
 
 # done
 $Input = Read-Host -Prompt "Done!  Press enter to quit"
