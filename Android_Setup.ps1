@@ -1,7 +1,6 @@
 # Things to note
 # Script needs internet access to download files
 # Script assumes WinGet is installed
-# Script will remotely grab the json fragments and import for winget
 # Script assumes winget's setting has this line in it: experimentalFeatures": { "import": true }, 
 
 $mypath = $MyInvocation.MyCommand.Path
@@ -14,7 +13,12 @@ if (!$isAdmin) {
 }
 
 # installing what I like 😊
-winget import Terminal_WinGet.json
+# winget import Android_WinGet.json
+
+winget install Microsoft.WindowsTerminalPreview
+winget install Git.Git
+winget install Microsoft.SurfaceDuoEmulator
+winget install Google.AndroidStudio
 
 # since env won't reset right now, directly adding git to path
 $env:Path += ";" + $Env:Programfiles + "\git\cmd"
@@ -22,11 +26,16 @@ $env:Path += ";" + $Env:Programfiles + "\git\cmd"
 # Getting terminal source code cloned
 mkdir $env:USERPROFILE/source/repo
 cd $env:USERPROFILE/source/repo
-git clone https://github.com/microsoft/terminal
+
+# git clone https://github.com/microsoft/terminal
+# git clone https://github.com/microsoft/powertoys
+# git clone https://github.com/microsoft/winget-cli
+git clone https://github.com/microsoft/surface-duo-compose-samples
 
 # Copy JSON fragments to Terminal folder
 $termFragPath = $env:LOCALAPPDATA + "\Microsoft\Windows Terminal\Fragments\build-extension"
 mkdir $termFragPath
+
 move-item -Path $mypath\build-extension -Destination $termFragPath
 
 # done
