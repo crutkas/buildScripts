@@ -12,13 +12,14 @@ if (!$isAdmin) {
 	exit;
 }
 
-# installing what I like 😊
-# winget import Android_WinGet.json
+# Copy JSON fragments to Terminal folder
+$termFragPath = $env:LOCALAPPDATA + "\Microsoft\Windows Terminal\Fragments\"
+mkdir $termFragPath
 
-winget install Microsoft.WindowsTerminalPreview
-winget install Git.Git
-winget install Microsoft.SurfaceDuoEmulator
-winget install Google.AndroidStudio
+move-item -Path .\build-extension -Destination $termFragPath
+
+# installing what I like 😊
+winget import Android_WinGet.json
 
 # since env won't reset right now, directly adding git to path
 $env:Path += ";" + $Env:Programfiles + "\git\cmd"
@@ -31,12 +32,6 @@ cd $env:USERPROFILE/source/repo
 # git clone https://github.com/microsoft/powertoys
 # git clone https://github.com/microsoft/winget-cli
 git clone https://github.com/microsoft/surface-duo-compose-samples
-
-# Copy JSON fragments to Terminal folder
-$termFragPath = $env:LOCALAPPDATA + "\Microsoft\Windows Terminal\Fragments\build-extension"
-mkdir $termFragPath
-
-move-item -Path $mypath\build-extension -Destination $termFragPath
 
 # done
 $Input = Read-Host -Prompt "Done!  Press enter to quit"
