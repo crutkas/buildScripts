@@ -25,7 +25,7 @@
                 { "Id" : "Git.Git" },
                 { "Id" : "Figma.Figma" },
                 { "Id" : "Microsoft.PowerToys" },
-                { "Id" : "Microsoft.VisualStudioCode.User-x64" },
+                { "Id" : "Microsoft.VisualStudioCode" },
                 { "Id" : "Microsoft.VisualStudio.Enterprise" }
             ],
             "SourceDetails" : 
